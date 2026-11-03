@@ -39,19 +39,6 @@ description: >-
 - Commands inside agents that list or fetch hundreds of items need progress output and a
   cap. Otherwise a single account-wide listing looks like a hang.
 
-## Paged fetches (API/MCP searches with thousands of results)
-
-- **Split by a range key (e.g. date windows), one agent each, and get each range's exact
-  count first.** Then each agent can prove it's complete (total keys == unique keys ==
-  count). Ranges by "last updated" are very uneven: 19 / 5 / 4,679 / 655 tickets in
-  2026-09. The one big window took ~50 min while the others took ~2.
-- **Verify on disk yourself; don't take "matches totalCount" from the report.** Parse every
-  saved page, recount keys, and regex-check any hand-written key list.
-- **Anything an agent wrote by hand (inline results it couldn't copy as a file) gets a
-  structure check** before use, e.g. every record has the expected field count.
-- One bad item can time out a whole page every time. The agent should bisect the page size
-  down to 1, save that item without the heavy field, and report the gap.
-
 ## Scripts agents will run
 
 - `set -o pipefail` + `head` = SIGPIPE (exit 141) kills the script partway through.

@@ -40,35 +40,17 @@ anchors and a two-column contents box, pipe tables, fenced code, one nesting lev
 as data URIs, the lightbox below. Copy it into the new doc folder, change the `DOCS` list to `(md, html)` pairs, write the
 Markdown, run it. Two docs built this way 2026-09-22 in `~/Downloads/projects/focus-362-import-process/`.
 
-The copy in `~/Downloads/focus-1.0-import-tool/docs/build-html.py` also handles `####` (the original stops at `###`, and a `####` line renders as a literal paragraph). After a rebuild, reload with a cache-buster (`?v=2`): Chrome served the stale page once.
-
 Stay inside that Markdown subset: no nested tables, no HTML blocks, no reference-style links, no more than one list level.
 Verify after every build (below); the cheap assertions are heading count, table count, code-block count, that every contents
 link resolves to an existing id, no console errors, and `document.documentElement.scrollWidth <= innerWidth`.
 
 ## Verify before sharing (mandatory)
 
-**`file://` works** — corrected 2026-09-24, three docs verified that way. The old "Playwright blocks file://" line was wrong for a FULLY self-contained doc (every image is an inline `data:` URI, so nothing is fetched cross-origin). Only spin up `python3 -m http.server 8377 --bind 127.0.0.1` if the page still references external files.
-
-Assert, in one run: every `img.naturalWidth > 0`, click an image → overlay `.open` present and lightbox img loaded, Esc closes it, zero console/page errors, and **no horizontal overflow at BOTH 1280 and 400 px**.
-
-**Claude in Chrome cannot open `file://`** (2026-09-29: "Can't interact with browser-internal or unparseable URLs") unless the extension's "Allow access to file URLs" is on. Serve the folder with `python3 -m http.server 8377 --bind 127.0.0.1` (run it as a background task and stop THAT task; never `pkill -f 'http.server'` from Bash, it matches and kills its own shell) and open `http://127.0.0.1:8377/<doc>.html`. `resize_window` does not shrink a maximised window (innerWidth stayed 1920), so run the 400 px check in a scripted headless browser (below).
-
-**Markdown tables: a `|` inside a cell, even inside backticks, splits the row** (`slug|label` did). Say "separated by a vertical bar" instead, and assert every table row has the header's cell count.
-
-**Test at 400 px or the worst bug hides.** `document.documentElement.scrollWidth > innerWidth` is false at the default viewport and true on a phone. Culprit is almost always a table: `width:100%` loses to the table's min-content width, so it bursts out of its padded container. Fix once, in the shared CSS:
-```css
-@media (max-width:640px) { table { display:block; overflow-x:auto; } }
+Playwright blocks `file://` — serve locally, then test the real behavior:
+```bash
+python3 -m http.server 8377 --bind 127.0.0.1 &   # from the doc's folder
 ```
-When overflow does fire, find the guilty node instead of guessing — walk `main *` and report any `getBoundingClientRect().right > innerWidth + 1`.
-
-**Launching chromium here (2026-09-24):** `playwright-core` in the repos is 1.61.1 and wants browser build 1228, which is NOT in `~/.cache/ms-playwright` (1208 and 1223 are). Launch fails with "Executable doesn't exist … chromium_headless_shell-1228". Pass an installed one explicitly:
-```js
-const {chromium} = require("/home/ljanaideh/Downloads/projects/aida-emdash-poc/node_modules/.pnpm/playwright-core@1.61.1/node_modules/playwright-core");
-const b = await chromium.launch({ executablePath:
-  "/home/ljanaideh/.cache/ms-playwright/chromium_headless_shell-1223/chrome-headless-shell-linux64/chrome-headless-shell" });
-```
-See also the `driving-playwright-directly` skill.
+With Playwright: navigate, assert every `img.naturalWidth > 0`, click an image → overlay `.open` present and lightbox img loaded, Esc and overlay-click close it, zero console errors. Kill the server after.
 
 ## Common mistakes
 

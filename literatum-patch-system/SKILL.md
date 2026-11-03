@@ -1,6 +1,13 @@
 ---
 name: literatum-patch-system
-description: Use for Literatum DB patches and the patch VM — ProductPatch on the Deploy Server, platform-tools patch.py / run_gradle.sh, DbPatchSystem, DB_VERSION, literatum-patch stubs (com.atypon.patch.PatchN) vs modules.migration classes, reserved patches, patch ordering, and errors like `Patch litNNNNN failed to execute`, `ClassNotFoundException: com.atypon.patch.Patch…`, `Patch failed! Output is in /var/tmp/…`, `"patch" is null`, ReadOnlyException in a patch, `KILLING THE SYSTEM` in the patch VM. Strictly read-only.
+description: >-
+  Use for Literatum DB patches and the patch VM — ProductPatch on the Deploy Server,
+  platform-tools patch.py / run_gradle.sh, DbPatchSystem, DB_VERSION,
+  literatum-patch stubs (com.atypon.patch.PatchN) vs modules.migration classes,
+  reserved patches, patch ordering, and errors like `Patch litNNNNN failed to
+  execute`, `ClassNotFoundException: com.atypon.patch.Patch…`,
+  `Patch failed! Output is in /var/tmp/…`, `"patch" is null`, ReadOnlyException
+  in a patch, `KILLING THE SYSTEM` in the patch VM. Strictly read-only.
 ---
 
 # Literatum DB patch system (read-only)

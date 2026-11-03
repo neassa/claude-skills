@@ -1,6 +1,14 @@
 ---
 name: literatum-ansible
-description: Use when a Literatum Deploy Server step that runs Ansible fails or misbehaves (SolrDeploy, ProductConsumerDeploy, GaiaDeploy, PugrendererProductDeploy, CassandraDeploy, ZkDeploy, KafkaClusterDeploy, ProductAtmDeploy, ProductIngestionDeploy, Elk*, ProxySolrDeploy, …), when a log shows `ansible-actions`, `SYNC [...ansible/<svc>/<ver>...]`, `Error [51]`–`[55]`, `COMPLETED SUCCESS/FAILURE`, `fatal: [...] UNREACHABLE`, or when asked how atypon/ansible-* repos, ansible-inventory or a service's deploy_version work. Strictly read-only.
+description: >-
+  Use when a Literatum Deploy Server step that runs Ansible fails or misbehaves
+  (SolrDeploy, ProductConsumerDeploy, GaiaDeploy, PugrendererProductDeploy,
+  CassandraDeploy, ZkDeploy, KafkaClusterDeploy, ProductAtmDeploy,
+  ProductIngestionDeploy, Elk*, ProxySolrDeploy, …), when a log shows
+  `ansible-actions`, `SYNC [...ansible/<svc>/<ver>...]`, `Error [51]`–`[55]`,
+  `COMPLETED SUCCESS/FAILURE`, `fatal: [...] UNREACHABLE`, or when asked how
+  atypon/ansible-* repos, ansible-inventory or a service's deploy_version work.
+  Strictly read-only.
 ---
 
 # Literatum Ansible deploy layer (read-only)

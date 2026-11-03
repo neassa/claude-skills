@@ -44,6 +44,16 @@ description: Use for Literatum search and indexing — Solr cloud cores and conf
 | Newly enabled core missing old documents | offset reset is `latest`: messages before its first commit are skipped |
 | Kafka send failures from Literatum | cached, retried, then dropped without failing the job (lit-2610 jar not locally verified) |
 
+## Live Solr/ZooKeeper status
+
+For a current site status report, use `literatum-solr-health`. Do not equate Solr's
+`/admin/zookeeper/status` RED with a failed ensemble without checking the error: if it says
+`conf` is not whitelisted, that is a blocked diagnostic command. Compare deployconf with
+Solr's runtime `zkHost`, query cluster/live-node and replica state, and use read-only `srvr`
+responses from every configured `host:port` to establish peer reachability and leader/follower
+views. Distinguish those observations from a formal quorum check and from end-to-end search
+availability. Never change the ZooKeeper whitelist during read-only triage.
+
 ## Deep notes
 
 `28-literatum-search-rest-db.md` (cores, index sync, IssuePipeline), `29-solr-plugins-id-index.md` (schema generation, consumer, versions matrix, 22 signatures), `21-passport-rootpom-idsearch.md` (id-search client), `03-ansible.md` (ansible-solr, ansible-consumer), `11-ansible-services.md` (proxysolr, searchservice), `10-ansible-infra.md` (ZooKeeper, Kafka), `12-literatum-runtime.md` §3.

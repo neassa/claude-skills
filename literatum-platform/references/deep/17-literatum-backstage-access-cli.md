@@ -311,7 +311,6 @@ There is **no registry list of "read-only groups"**: `grep read-?only-?group` in
 - `Patch032053` (`publish/src/java/com/atypon/modules/migration/Patch032053.java:10,19-22`) resolves `"104.030.132.204"` (already canonical) and **`delete()`s** that IP user.
 - **That IP is not in `LP/data/AtyponIPs/atyponIPs.txt` @ HEAD** (0 matches for `104.0?30.132.`). The file's 104.30.x lines are elsewhere, and I did not print them.
 - So the "member of Atypon Institution" explanation in note 04 is **less likely than note 04 assumed**, at least for the current file. The remaining ways the IP user or its licenses are read-only:
-  - **RESOLVED 2026-09-28 (LIT-683700):** the DB showed the IP user (1012507) IS a member of group 520 "Atypon Institution" (type 66 = 3) → inherited read-only. Note 04 was right; this note's downgrade from the file was wrong: a repo data file does not show DB membership. Fix: literatum PR #14359 removes the IP from AUTO_TEST_USER instead of deleting it.
   1. The IP user is in some other CR-marked group (`AUTO_TEST_USER` itself, if CR, or a parent of it).
   2. Its own Fields are CR (`--$markReadOnly` or an older run).
   3. It holds or owns a license whose licensee is read-only.

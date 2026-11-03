@@ -5,7 +5,7 @@ description: Use whenever the claude-sandbox repo, its GitHub releases, or its i
 
 # claude-sandbox
 
-Reference guide for working on the `ljanaideh/claude-sandbox` project.
+Reference guide for working on the `<user>/claude-sandbox` project.
 
 ## Key constraints
 
@@ -36,7 +36,7 @@ git push
 
 **Check release asset state:**
 ```bash
-gh release view vX.Y.Z --repo ljanaideh/claude-sandbox --json assets --jq '.assets[] | .name'
+gh release view vX.Y.Z --repo <user>/claude-sandbox --json assets --jq '.assets[] | .name'
 ```
 
 **Fix partial release (assets missing, dist/ has tarballs):**
@@ -47,7 +47,7 @@ gh release upload vX.Y.Z \
     dist/SHA256SUMS \
     scripts/install.sh \
     scripts/install.ps1 \
-    --repo ljanaideh/claude-sandbox --clobber
+    --repo <user>/claude-sandbox --clobber
 ```
 If `dist/` is empty — stop, report, let the human decide.
 

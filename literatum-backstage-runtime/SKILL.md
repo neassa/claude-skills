@@ -40,8 +40,6 @@ description: Use for the Literatum backstage/web JVM runtime after a deploy — 
 - **Site read-only mode** (`WriteDeniedError`) and **entity read-only** (bare `ReadOnlyException`) are different.
 - Licenses are CR-marked in their own right often (subscription, synthetic children, product licenses; gated only by `license/disable-read-only`).
 - `IdentityImpl.deleteLicenses:917-934` deletes held/owned licenses **without unmarking**; `SyntheticLicense.deleteImpl` unmarks first. So deleting an IP user who holds a CR license throws (aiaa lit32053). Which license needs the DB: LICENSE by USERID/OWNERID → FIELD_VALUE_INFO type 66, or CR parent groups (USER_REL 1000).
-- **Read-only is inherited from groups.** An identity in a group whose access-right field (FIELD_VALUE_INFO type 66) is 3 is read-only, and so are its licenses. aiaa lit32053 (LIT-683700): the IP user was in group 520 "Atypon Institution" (value 3). The fix was to remove the user from AUTO_TEST_USER instead of deleting it (PR #14359).
-- **A repo data file does not prove DB membership.** `literatum-patch/data/AtyponIPs/atyponIPs.txt` not listing an IP does not mean the IP user is outside Atypon Institution on a site. Group membership can only be settled in the DB (USER_REL RELATIONID=1000). Mark it DB-only; don't call it refuted.
 
 ## Deep notes
 

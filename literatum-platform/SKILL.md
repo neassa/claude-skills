@@ -27,6 +27,16 @@ Set `LIT_REPOS` to a folder of **read-only** clones of the atypon repos (`gh rep
 7. **Parse deployconf with an XML parser**, not grep: values are often attributes.
 8. **Failure is reliable; Success often isn't** (text-matched verdicts, lost exit codes). See `../literatum-deploy-triage/references/false-successes.md`.
 
+## Solr status reports
+
+When asked to check or recheck Solr status, always return a concise report rather than a bare
+status word. Lead with the overall assessment and timestamp/environment, then summarize live
+Solr nodes, collection and replica health, ZooKeeper connectivity/quorum evidence versus
+diagnostic-only failures, and overseer queues. Include useful per-collection document counts
+and aliases when requested or relevant. Clearly distinguish verified live observations from
+deployconf/repository context, state the source, and keep the investigation read-only. For
+live checks and interpreting ZooKeeper RED, use `literatum-solr-health`.
+
 ## The system in one picture
 
 ```

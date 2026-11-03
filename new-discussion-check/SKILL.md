@@ -5,7 +5,7 @@ description: Use when a new user prompt looks unrelated to the current thread of
 
 # New-discussion check
 
-Laith runs long multi-day sessions and sometimes types a prompt into the wrong terminal. When a prompt looks like a topic break, do NOT silently guess — a wrong guess either drags stale context into fresh work or executes an unrelated instruction meant for another session.
+the user runs long multi-day sessions and sometimes types a prompt into the wrong terminal. When a prompt looks like a topic break, do NOT silently guess — a wrong guess either drags stale context into fresh work or executes an unrelated instruction meant for another session.
 
 ## When to ask
 

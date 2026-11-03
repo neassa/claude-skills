@@ -5,12 +5,6 @@ description: Use when checking a web page visually from Claude Code with the mcp
 
 # Verifying UI with the Playwright MCP tools
 
-## First: which browser (Laith, 2026-09-28)
-
-**Test in Laith's Chrome (Claude in Chrome, `mcp__claude-in-chrome__*`; load the `claude-in-chrome` skill first) — for real sites AND the local dev site** (`*.localhost:4321` opens in his Chrome too). His words: "prefare claude in chorme over playwrite". His session also sees gated Focus 1.0 full text and gets past Cloudflare on POC, which Playwright does not.
-
-**Playwright only as the fallback:** scripted, repeatable harnesses (e.g. `test-citation-jump.mjs`, many-viewport runs) or when the Chrome extension is not connected. Close every Chrome tab you open when done.
-
 ## Overview
 
 Tests prove behaviour; only a rendered screenshot proves layout. The Playwright MCP tools (`mcp__playwright__browser_*`) drive a persistent Chromium: cookies survive between calls, and every file it writes lands in **its own cwd**, not the Bash cwd.

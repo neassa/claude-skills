@@ -45,29 +45,7 @@ script, or a name assembled from a string. Grep the basename across the whole re
 including scripts and CI configuration.
 
 **Prove the switch landed.** After a push that used an explicit refspec, confirm the local
-ref and the remote ref actually match before acting as though the change is live. Two
-mechanics make them drift: `git push origin HEAD:<branch>` from a detached worktree moves
-the remote but leaves the local `<branch>` ref where it was, so the next worktree made from
-it diverges; and a clone whose fetch refspec tracks one branch never creates
-`origin/<other>` — `git fetch origin <other>` writes only `FETCH_HEAD`. Fetch with an
-explicit `+refs/heads/<b>:refs/remotes/origin/<b>` and compare `git rev-parse` of both
-sides; never judge a push by its last output line.
-
-## A resume or compaction is a context switch too
-
-A conversation summary is a frozen snapshot of what was true when it was written, and two
-things drift under it:
-
-- **The clock.** Sessions here run for days. 2026-09-27: a resumed summary carried the
-  date 2026-09-17 and I answered as though ten days had not passed.
-- **The files.** Parallel and later sessions edit the same skills and memories. The same
-  resume: the summary said `--deliver` was "not yet live-run" and a jump-host
-  `TargetNotConnected` looked unexplained, while `focus-node-db-access/SKILL.md` on disk
-  already recorded the failed first live run of 2026-09-18 and the jump host's daily
-  agent restart / Sunday reboot schedule.
-
-**On resume, before repeating any conclusion the summary hands you:** check today's date,
-and re-open the skill or memory the claim came from. One read, not a re-derivation.
+ref and the remote ref actually match before acting as though the change is live.
 
 ## Founding failure
 

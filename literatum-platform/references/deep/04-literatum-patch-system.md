@@ -523,7 +523,6 @@ IPRangeUser.delete()                        → AbstractDbBasic.delete (tx exist
 - Every license this path deletes is freshly loaded from the DB. The `ReadOnlyException()` (no message) comes from the **dynamic** `isReadOnly()` rules.
 
 **Most likely cause:** the old IP range user is a **member of a CR-marked group**, and "Atypon Institution" is the prime suspect.
-  - **RESOLVED 2026-09-28 (LIT-683700):** the DB showed the IP user (1012507) IS a member of group 520 "Atypon Institution" (type 66 = 3) → inherited read-only. Note 04 was right; this note's downgrade from the file was wrong: a repo data file does not show DB membership. Fix: literatum PR #14359 removes the IP from AUTO_TEST_USER instead of deleting it.
 - `AddAtyponIPsToAtyponInstitution` loads corporate IP ranges from `data/AtyponIPs/atyponIPs.txt` into that institution. It creates them with description `Atypon Ip <min>-<max>`, then `EntityAccessRights.markReadOnly(inst.getFields())` (:138).
 - That makes every member IP user read-only (`IdentityImpl.java:627-632`), and every license held by that IP user read-only too (`LicenseImpl.java:630`).
 

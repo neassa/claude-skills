@@ -40,7 +40,6 @@ All repos are under github.com/atypon. Local read-only clones: `$LIT_REPOS/`.
   - product props: `atypon/product/<p>/conf/<p>.props.xml`
 - **Tag names:** root-pom `atypon-root-pom-2610.0.X`; styleguide renderer `UI-Renderer-V2.6.7`; gaia-fe `gaia-fe-1.6.7`. Use `git ls-remote --tags origin | grep <ver>` rather than guessing.
 - **Account-level actions** (e.g. `CassandraDeploy`, `scope="AccountLevel"` in `deployserver/config/actions-config.xml`) carry **no product**, so a product-filtered search never finds them. Search them without a product: `ds_search.py <acct> "" CassandraDeploy 200`.
-- **Jira:** LIT lives on `atypon.atlassian.net` (Atlassian connector cloudId `6bfba5f3-1c23-4def-98c0-c0592a82537c`), read-only JQL. Not the wiley-global site. The connector has **no write tools** (no comment/create/edit). Posting means the user pastes the text, or you type it in their Chrome after they OK the exact text.
-- **Clone refs:** a clone may fetch only `master` (`git config --get-all remote.origin.fetch`). Before reading branch X, run `git fetch origin +refs/heads/X:refs/remotes/origin/X`. Never hide `git show` errors (`2>/dev/null`): a missing ref then looks like "not on this branch".
+- **Jira:** LIT lives on `atypon.atlassian.net` (Atlassian connector cloudId `6bfba5f3-1c23-4def-98c0-c0592a82537c`), read-only JQL. Not the wiley-global site.
 - **Search the org** before calling code missing: `gh search code "<file or symbol>" --owner atypon`. Package names and repo names often differ (e.g. `@atypon/styleguide-webpack-configuration` lives in `styleguide-bundle-configurations`).
 
